@@ -12,7 +12,8 @@ import {
 } from "lucide-react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
+import LoginAction from "@/app/actions/loginAction";
 
 const displayFont = Cormorant_Garamond({
   subsets: ["latin"],
@@ -20,11 +21,24 @@ const displayFont = Cormorant_Garamond({
 });
 
 export default function LoginForm() {
+  const initialState = {
+    ok: false,
+    error: "",
+    data: null,
+  };
   const [showPassword, setShowPassword] = useState(false);
 
   function togglePasswordShow() {
     setShowPassword(!showPassword);
   }
+
+  const [state, action] = useActionState(LoginAction, initialState);
+
+  useEffect(() => {
+    if (state.ok) {
+      window.location.href = "/explorar";
+    }
+  }, [state.ok]);
 
   return (
     <section className="w-full max-w-107.5">
@@ -52,7 +66,7 @@ export default function LoginForm() {
         </p>
       </div>
 
-      <form className="mt-6 sm:mt-7">
+      <form action={action} className="mt-6 sm:mt-7">
         <div>
           <label
             htmlFor="email"
@@ -104,7 +118,7 @@ export default function LoginForm() {
         </div>
 
         <button
-          type="button"
+          type="submit"
           className="mt-6 flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-primary px-5 text-base font-semibold text-primary-foreground transition hover:brightness-95 cursor-pointer"
         >
           <PawPrint className="size-5" />

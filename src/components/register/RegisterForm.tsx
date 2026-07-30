@@ -1,6 +1,6 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Cormorant_Garamond } from "next/font/google";
 import {
   ArrowLeft,
   ArrowRight,
@@ -12,13 +12,30 @@ import {
 } from "lucide-react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-
-const displayFont = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-});
+import { useActionState, useEffect, useState } from "react";
+import RegisterAction from "@/app/actions/registerAction";
 
 export default function RegisterForm() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  function togglePassword() {
+    setShowPassword(!showPassword);
+  }
+
+  const initialState = {
+    ok: false,
+    error: "",
+    data: null,
+  };
+
+  const [state, action] = useActionState(RegisterAction, initialState);
+
+  useEffect(() => {
+    if (state.ok) {
+      window.location.href = "/explorar";
+    }
+  }, [state.ok]);
+
   return (
     <section className="w-full max-w-107.5">
       <div className="flex justify-center">
@@ -33,9 +50,7 @@ export default function RegisterForm() {
       </div>
 
       <div className="mt-4 text-center sm:mt-5">
-        <h1
-          className={`${displayFont.className} text-[36px] font-bold leading-tight text-foreground sm:text-[40px]`}
-        >
+        <h1 className="font-nunito text-[36px] font-bold leading-tight text-foreground sm:text-[40px]">
           Criar sua conta
         </h1>
 
@@ -45,7 +60,7 @@ export default function RegisterForm() {
         </p>
       </div>
 
-      <form className="mt-5 sm:mt-6">
+      <form action={action} className="mt-5 sm:mt-6">
         {/* Nome */}
         <div>
           <label
@@ -105,14 +120,15 @@ export default function RegisterForm() {
             <Input
               id="password"
               name="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Crie uma senha"
               className="h-11 w-full rounded-xl border border-border bg-surface pl-12 pr-12 text-[14px] text-foreground outline-none transition focus:ring-4 focus:ring-primary/10"
             />
 
             <button
               type="button"
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground transition hover:text-primary"
+              onClick={togglePassword}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground transition hover:text-primary cursor-pointer"
             >
               <Eye className="size-5" />
             </button>
@@ -120,7 +136,7 @@ export default function RegisterForm() {
         </div>
 
         <button
-          type="button"
+          type="submit"
           className="mt-5 flex h-11 w-full items-center justify-center gap-3 rounded-xl bg-primary px-5 text-sm sm:text-base font-semibold text-primary-foreground transition hover:brightness-95 cursor-pointer"
         >
           <PawPrint className="size-5" />

@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Cormorant_Garamond } from "next/font/google";
 import {
   ArrowRight,
   Eye,
@@ -14,11 +13,6 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useActionState, useEffect, useState } from "react";
 import LoginAction from "@/app/actions/loginAction";
-
-const displayFont = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-});
 
 export default function LoginForm() {
   const initialState = {
@@ -55,7 +49,7 @@ export default function LoginForm() {
 
       <div className="mt-1 text-center sm:mt-5">
         <h1
-          className={`${displayFont.className} text-[36px] font-bold leading-tight text-foreground sm:text-[40px]`}
+          className="font-nunito text-[36px] font-bold leading-tight text-foreground sm:text-[40px]"
         >
           Entre na sua conta
         </h1>

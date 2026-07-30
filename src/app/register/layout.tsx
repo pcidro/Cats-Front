@@ -1,10 +1,4 @@
 import Image from "next/image";
-import { Cormorant_Garamond } from "next/font/google";
-
-const displayFont = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-});
 
 export default function RegisterLayout({
   children,
@@ -50,7 +44,7 @@ export default function RegisterLayout({
             />
 
             <h2
-              className={`${displayFont.className} max-w-md text-[42px] font-bold leading-[0.98] text-white xl:text-[48px]`}
+              className="font-nunito max-w-md text-[42px] font-bold leading-[0.98] text-white xl:text-[48px]"
             >
               Bem-vindo à
               <br />

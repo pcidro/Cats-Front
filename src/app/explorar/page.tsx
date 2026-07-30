@@ -6,5 +6,6 @@ export default async function PageExplorar() {
   if (!user) {
     redirect("/login");
   }
+
   return <div>Explorar</div>;
 }

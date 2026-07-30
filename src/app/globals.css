@@ -34,6 +34,18 @@
 
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+
+  --font-nunito: var(--font-nunito);
+  --font-nunito-sans: var(--font-nunito-sans);
+  --font-sans: var(--font-nunito-sans), sans-serif;
+}
+
+body {
+  font-family: var(--font-nunito-sans), sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-nunito), sans-serif;
 }
 
 @theme {

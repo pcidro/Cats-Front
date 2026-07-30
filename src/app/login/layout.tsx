@@ -64,7 +64,7 @@ export default function LoginLayout({
           </div>
         </aside>
 
-        <section className="flex items-center justify-center bg-surface px-6 py-6 sm:px-10 sm:py-10 lg:min-h-190 lg:px-14 xl:px-20">
+        <section className="flex items-center justify-center">
           {children}
         </section>
       </div>

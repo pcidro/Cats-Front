@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_URL as string;
+const API_URL = process.env.NEXT_PUBLIC_URL || "http://localhost:3333";
 
 export function getApiUrl() {
   return API_URL;
@@ -37,20 +37,14 @@ export async function apiClient<T>(
   });
 
   if (!response.ok) {
-    if (response.status === 401) {
+    if (response.status === 403 || response.status === 401) {
       throw new Error(
-        "You are not authenticated. Please sign in and try again.",
+        "Ação não autorizada. Apenas administradores podem realizar esta operação.",
       );
     }
-
-    if (response.status === 403) {
-      throw new Error("You do not have permission to perform this action.");
-    }
-
     throw new Error(
-      `Request failed: ${response.statusText} (${response.status})`,
+      `Erro na requisição: ${response.statusText} ${response.status}`,
     );
   }
-
   return response.json() as Promise<T>;
 }

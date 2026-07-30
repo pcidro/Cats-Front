@@ -6,7 +6,7 @@ const displayFont = Cormorant_Garamond({
   weight: ["600", "700"],
 });
 
-export default function LoginLayout({
+export default function RegisterLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -52,14 +52,14 @@ export default function LoginLayout({
             <h2
               className={`${displayFont.className} max-w-md text-[42px] font-bold leading-[0.98] text-white xl:text-[48px]`}
             >
-              Bem-vindo de volta
+              Bem-vindo à
               <br />
-              ao seu cantinho felino.
+              comunidade felina.
             </h2>
 
             <p className="mt-6 max-w-md text-[17px] leading-7 text-white/90">
-              Compartilhe momentos, descubra gatos incríveis e reconecte-se com
-              uma comunidade que ama gatos como você.
+              Crie sua conta e comece a compartilhar momentos incríveis com seu
+              gato e com quem ama tanto gatos quanto você.
             </p>
           </div>
         </aside>

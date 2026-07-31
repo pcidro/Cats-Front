@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Nunito, Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header/header";
+import { getUser } from "@/utils/getuser";
+import { UserContextProvider } from "@/context/userContext";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -18,16 +20,19 @@ export const metadata: Metadata = {
   description: "Uma rede social feita para gatos.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getUser();
   return (
     <html lang="pt-BR" className={`${nunito.variable} ${nunitoSans.variable}`}>
       <body className="font-sans">
-        <Header />
-        <main className="pb-24 md:pb-0">{children}</main>
+        <UserContextProvider user={user}>
+          <Header />
+          <main className="pb-24 md:pb-0">{children}</main>
+        </UserContextProvider>
       </body>
     </html>
   );

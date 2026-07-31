@@ -1,7 +1,18 @@
+"use server";
+
 import { apiClient } from "./api-client";
 import { getToken } from "./cookies";
 
-export async function getUser() {
+export type UserResponse = {
+  id: string;
+  name: string;
+  email: string;
+  role: "ADMIN" | "USER" | "MODERATOR";
+  createdAt: string;
+  avatarUrl?: string | undefined;
+};
+
+export async function getUser(): Promise<UserResponse | null> {
   try {
     const token = await getToken();
 
@@ -9,7 +20,7 @@ export async function getUser() {
       return null;
     }
 
-    const user = await apiClient("/api/me", {
+    const user = await apiClient<UserResponse>("/api/me", {
       token,
     });
     return user;

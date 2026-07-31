@@ -12,9 +12,11 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useActionState, useEffect, useState } from "react";
-import LoginAction from "@/app/actions/loginAction";
+import { useRouter } from "next/navigation";
+import LoginAction from "@/actions/user/loginAction";
 
 export default function LoginForm() {
+  const router = useRouter();
   const initialState = {
     ok: false,
     error: "",
@@ -30,9 +32,10 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (state.ok) {
-      window.location.href = "/explorar";
+      router.refresh();
+      router.push("/explorar");
     }
-  }, [state.ok]);
+  }, [state.ok, router]);
 
   return (
     <section className="w-full max-w-107.5">
@@ -48,9 +51,7 @@ export default function LoginForm() {
       </div>
 
       <div className="mt-1 text-center sm:mt-5">
-        <h1
-          className="font-nunito text-[36px] font-bold leading-tight text-foreground sm:text-[40px]"
-        >
+        <h1 className="font-nunito text-[36px] font-bold leading-tight text-foreground sm:text-[40px]">
           Entre na sua conta
         </h1>
 

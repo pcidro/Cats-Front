@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Compass, Home, LogIn, UserPlus } from "lucide-react";
+import { Compass, Home, LogIn, UserPlus, LogOut } from "lucide-react";
+import { useUser } from "@/context/userContext";
+import { logoutAction } from "@/actions/user/logoutAction";
 
 const navigationItems = [
   {
@@ -15,20 +17,11 @@ const navigationItems = [
     label: "Explorar",
     icon: Compass,
   },
-  {
-    href: "/login",
-    label: "Entrar",
-    icon: LogIn,
-  },
-  {
-    href: "/register",
-    label: "Criar",
-    icon: UserPlus,
-  },
 ];
 
 export default function HeaderMobile() {
   const pathname = usePathname();
+  const { user } = useUser();
 
   function isActive(href: string) {
     if (href === "/") {
@@ -38,8 +31,12 @@ export default function HeaderMobile() {
     return pathname.startsWith(href);
   }
 
+  async function handleLogout() {
+    await logoutAction();
+  }
+
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 pb-[env(safe-area-inset-bottom) md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 pb-[env(safe-area-inset-bottom)] md:hidden">
       <ul className="mx-auto grid max-w-lg grid-cols-4">
         {navigationItems.map((item) => {
           const Icon = item.icon;
@@ -61,6 +58,68 @@ export default function HeaderMobile() {
             </li>
           );
         })}
+
+        {user ? (
+          <>
+            <li>
+              <Link
+                href="/profile"
+                className={`flex min-h-16 flex-col items-center justify-center gap-1 px-2 py-2 text-xs font-medium ${
+                  isActive("/profile")
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <img
+                  className={`w-6 h-6 rounded-full object-cover ${
+                    isActive("/profile") ? "ring-2 ring-primary" : ""
+                  }`}
+                  src={user.avatarUrl ? user.avatarUrl : "/img/nouser.jpg"}
+                  alt="Perfil"
+                />
+                Perfil
+              </Link>
+            </li>
+            <li>
+              <button
+                onClick={handleLogout}
+                className="flex w-full min-h-16 flex-col items-center justify-center gap-1 px-2 py-2 text-xs font-medium text-muted-foreground hover:text-foreground cursor-pointer"
+              >
+                <LogOut size={22} />
+                Sair
+              </button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link
+                href="/login"
+                className={`flex min-h-16 flex-col items-center justify-center gap-1 px-2 py-2 text-xs font-medium ${
+                  isActive("/login")
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <LogIn size={22} />
+                Entrar
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/register"
+                className={`flex min-h-16 flex-col items-center justify-center gap-1 px-2 py-2 text-xs font-medium ${
+                  isActive("/register")
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <UserPlus size={22} />
+                Criar
+              </Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );

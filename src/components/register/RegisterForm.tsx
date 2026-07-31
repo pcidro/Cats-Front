@@ -13,9 +13,11 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useActionState, useEffect, useState } from "react";
-import RegisterAction from "@/app/actions/registerAction";
+import { useRouter } from "next/navigation";
+import RegisterAction from "@/actions/user/registerAction";
 
 export default function RegisterForm() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   function togglePassword() {
@@ -32,9 +34,10 @@ export default function RegisterForm() {
 
   useEffect(() => {
     if (state.ok) {
-      window.location.href = "/explorar";
+      router.refresh();
+      router.push("/explorar");
     }
-  }, [state.ok]);
+  }, [state.ok, router]);
 
   return (
     <section className="w-full max-w-107.5">

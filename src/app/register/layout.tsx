@@ -43,10 +43,8 @@ export default function RegisterLayout({
               className="h-auto w-40 object-contain brightness-0 invert"
             />
 
-            <h2
-              className="font-nunito max-w-md text-[42px] font-bold leading-[0.98] text-white xl:text-[48px]"
-            >
-              Bem-vindo à
+            <h2 className="font-nunito max-w-md text-[42px] font-bold leading-[0.98] text-white xl:text-[48px]">
+              Bem-vindo a
               <br />
               comunidade felina.
             </h2>

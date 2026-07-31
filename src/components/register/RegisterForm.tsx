@@ -54,11 +54,11 @@ export default function RegisterForm() {
 
       <div className="mt-4 text-center sm:mt-5">
         <h1 className="font-nunito text-[36px] font-bold leading-tight text-foreground sm:text-[40px]">
-          Criar sua conta
+          Crie sua conta
         </h1>
 
         <p className="mx-auto mt-2 max-w-sm text-[14px] leading-5 text-muted-foreground">
-          Junte-se à nossa comunidade felina e comece a compartilhar momentos
+          Junte-se a nossa comunidade felina e comece a compartilhar momentos
           incríveis com seu gatinho.
         </p>
       </div>

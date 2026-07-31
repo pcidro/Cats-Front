@@ -1,6 +1,13 @@
 "use client";
 import Link from "next/link";
-import { Compass, Home, UserPlus, PawPrint, LogOut } from "lucide-react";
+import {
+  Compass,
+  Home,
+  UserPlus,
+  PawPrint,
+  LogOut,
+  UserRound,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 import HeaderMobile from "./headermobile";
 import { useUser } from "@/context/userContext";
@@ -42,12 +49,13 @@ export default function Header() {
       ];
 
   async function handleLogout() {
+    setOpenMenu(false);
     await logoutAction();
   }
 
   return (
     <>
-      <div className="hidden w-full border-b border-border bg-white md:block">
+      <div className="sticky top-0 z-40 hidden w-full border-b border-border/70 bg-white/90 backdrop-blur-md md:block">
         <header className="flex items-center justify-between mx-auto max-w-7xl px-4 py-3">
           <Link href={user ? "/explorar" : "/"}>
             <img
@@ -79,38 +87,67 @@ export default function Header() {
             })}
 
             {user ? (
-              <div className="relative">
-                <li onClick={() => setOpenMenu(!OpenMenu)}>
+              <li className="relative">
+                <button
+                  type="button"
+                  onClick={() => setOpenMenu((open) => !open)}
+                  className="rounded-full"
+                  aria-expanded={OpenMenu}
+                >
                   <img
-                    className="w-12 h-12 rounded-full object-cover cursor-pointer"
-                    src={user.avatarUrl ? user.avatarUrl : "/img/nouser.jpg"}
-                    alt=""
+                    className="size-11 cursor-pointer rounded-full object-cover ring-2 ring-primary/15 ring-offset-2 transition hover:ring-primary/40"
+                    src={user.avatarUrl || "/img/nouser.jpg"}
+                    alt={`Foto de ${user.name}`}
                   />
-                </li>
+                </button>
 
                 {OpenMenu && (
-                  <ul className="absolute top-full mt-4 right-0 z-50 w-48 rounded-xl border border-border bg-white p-2 shadow-lg flex flew-col flex-col gap-2.5">
-                    <li>
-                      <Link
-                        href="/login"
-                        className="flex items-center gap-2 rounded-full border-2 border-border px-5 py-2 font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                      >
-                        <UserPlus size={22} />
-                        Meu perfil
-                      </Link>
-                    </li>
-                    <li>
-                      <button
-                        onClick={handleLogout}
-                        className="flex items-center gap-2 rounded-lg px-3 py-2 font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors w-full cursor-pointer"
-                      >
-                        <LogOut size={18} />
-                        Sair
-                      </button>
-                    </li>
-                  </ul>
+                  <div className="absolute right-0 top-[calc(100%+0.875rem)] z-50 w-64 overflow-hidden rounded-2xl border border-border/70 bg-white/95 p-2 shadow-[0_18px_45px_rgba(74,48,40,0.16)] ">
+                    <div className="flex items-center gap-3 px-3 py-3">
+                      <img
+                        className="size-10 rounded-full object-cover"
+                        src={user.avatarUrl || "/img/nouser.jpg"}
+                      />
+
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-semibold text-foreground">
+                          {user.name}
+                        </p>
+
+                        <p className="truncate text-xs text-muted-foreground">
+                          {user.email}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="my-1 h-px bg-border/70" />
+
+                    <Link
+                      href="/perfil"
+                      onClick={() => setOpenMenu(false)}
+                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground  hover:bg-primary/10 hover:text-foreground"
+                    >
+                      <UserRound
+                        size={18}
+                        className="text-muted-foreground hover:text-primary"
+                      />
+                      Meu perfil
+                    </Link>
+
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="group flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-red-50 hover:text-red-600"
+                    >
+                      <LogOut
+                        size={18}
+                        className="transition-colors group-hover:text-red-500"
+                      />
+                      Sair
+                    </button>
+                  </div>
                 )}
-              </div>
+              </li>
             ) : (
               <>
                 <li>

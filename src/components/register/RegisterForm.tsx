@@ -26,7 +26,7 @@ export default function RegisterForm() {
 
   const initialState = {
     ok: false,
-    error: "",
+    errors: {},
     data: null,
   };
 
@@ -84,6 +84,9 @@ export default function RegisterForm() {
               className="h-11 w-full rounded-xl border bg-surface pl-12 pr-4 text-[14px] text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
             />
           </div>
+          {state.errors.name && (
+            <p className="mt-1 text-sm text-red-500">{state.errors.name}</p>
+          )}
         </div>
 
         {/* E-mail */}
@@ -106,6 +109,9 @@ export default function RegisterForm() {
               className="h-11 w-full rounded-xl border bg-surface pl-12 pr-4 text-[14px] text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
             />
           </div>
+          {state.errors.email && (
+            <p className="mt-1 text-sm text-red-500">{state.errors.email}</p>
+          )}
         </div>
 
         {/* Senha */}
@@ -136,7 +142,16 @@ export default function RegisterForm() {
               <Eye className="size-5" />
             </button>
           </div>
+          {state.errors.password && (
+            <p className="mt-1 text-sm text-red-500">{state.errors.password}</p>
+          )}
         </div>
+
+        {state.errors.form && (
+          <p className="mt-3 text-sm font-medium text-red-500 text-center">
+            {state.errors.form}
+          </p>
+        )}
 
         <button
           type="submit"

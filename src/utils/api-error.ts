@@ -1,7 +1,9 @@
 export default function apiError(error: unknown) {
-  if (error instanceof Error) {
-    return { data: null, ok: false, error: error.message };
-  } else {
-    return { data: null, ok: false, error: "Erro desconhecido" };
-  }
+  return {
+    ok: false,
+    data: null,
+    errors: {
+      form: error instanceof Error ? error.message : "Unknown error.",
+    },
+  };
 }

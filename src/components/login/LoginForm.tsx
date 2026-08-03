@@ -19,7 +19,7 @@ export default function LoginForm() {
   const router = useRouter();
   const initialState = {
     ok: false,
-    error: "",
+    errors: {},
     data: null,
   };
   const [showPassword, setShowPassword] = useState(false);
@@ -81,6 +81,9 @@ export default function LoginForm() {
               className="h-12 w-full rounded-xl border border-border bg-surface pl-12 pr-12 text-[15px] text-foreground outline-none transition focus:ring-4 focus:ring-primary/10"
             />
           </div>
+          {state.errors.email && (
+            <p className="mt-1 text-sm text-red-500">{state.errors.email}</p>
+          )}
         </div>
 
         <div className="mt-4">
@@ -110,7 +113,16 @@ export default function LoginForm() {
               <Eye className="size-5" />
             </button>
           </div>
+          {state.errors.password && (
+            <p className="mt-1 text-sm text-red-500">{state.errors.password}</p>
+          )}
         </div>
+
+        {state.errors.form && (
+          <p className="mt-3 text-sm font-medium text-red-500 text-center">
+            {state.errors.form}
+          </p>
+        )}
 
         <button
           type="submit"

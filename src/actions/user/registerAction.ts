@@ -3,25 +3,47 @@ import { apiClient } from "@/utils/api-client";
 import apiError from "@/utils/api-error";
 import { setToken } from "@/utils/cookies";
 
-type stateProps = {
+export type RegisterStateProps = {
   ok: boolean;
-  error: string;
+  errors: {
+    name?: string;
+    email?: string;
+    password?: string;
+    form?: string;
+  };
   data: AuthResponse | null;
 };
 
 export default async function RegisterAction(
-  state: stateProps,
+  state: RegisterStateProps,
   formData: FormData,
-) {
+): Promise<RegisterStateProps> {
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+  const errors: RegisterStateProps["errors"] = {};
+
+  if (!name) {
+    errors.name = "Nome é necessário.";
+  }
+
+  if (!email) {
+    errors.email = "Email é necessário.";
+  }
+
+  if (!password) {
+    errors.password = "Senha é necessária.";
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return {
+      ok: false,
+      data: null,
+      errors,
+    };
+  }
+
   try {
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-
-    if (!email || !password || !name) {
-      throw new Error("Preencha os dados");
-    }
-
     await apiClient("/api/users", {
       method: "POST",
       body: JSON.stringify({ name, email, password }),
@@ -34,8 +56,9 @@ export default async function RegisterAction(
 
     await setToken(authResponse.token);
 
-    return { data: authResponse, ok: true, error: "" };
+    return { data: authResponse, ok: true, errors: {} };
   } catch (error: unknown) {
     return apiError(error);
   }
 }
+

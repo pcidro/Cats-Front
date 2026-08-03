@@ -74,7 +74,7 @@ export default function HeaderMobile() {
                   className={`w-6 h-6 rounded-full object-cover ${
                     isActive("/profile") ? "ring-2 ring-primary" : ""
                   }`}
-                  src={user.avatarUrl ? user.avatarUrl : "/img/nouser.jpg"}
+                  src={user.avatarUrl ? user.avatarUrl : "/img/gatos/nouser.jpg"}
                   alt="Perfil"
                 />
                 Perfil

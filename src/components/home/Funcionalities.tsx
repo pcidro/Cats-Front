@@ -7,49 +7,49 @@ const functionalities = [
     title: "Seu perfil",
     description:
       "Conte sua história, apresente seus felinos e conecte-se com outros tutores.",
-    image: "/img/personprofile.png",
+    image: "/img/gatos/personprofile.png",
     alt: "Perfil de uma tutora na plataforma Cats",
   },
   {
     title: "Todos os seus gatos",
     description:
       "Cadastre seus gatos e compartilhe suas características, costumes e manias.",
-    image: "/img/mycatsprofilee.jpg",
+    image: "/img/gatos/mycatsprofilee.jpg",
     alt: "Lista de gatos cadastrados por uma pessoa",
   },
   {
     title: "Perfil para cada gato",
     description:
       "Crie um espaço exclusivo para cada gato, com fotos, informações e personalidade.",
-    image: "/img/perfilgato.jpeg",
+    image: "/img/gatos/perfilgato.jpeg",
     alt: "Perfil individual de um gato",
   },
   {
     title: "Compartilhe momentos",
     description:
       "Publique fotos especiais e receba curtidas e comentários da comunidade.",
-    image: "/img/catpublication.jpeg",
+    image: "/img/gatos/catpublication.jpeg",
     alt: "Publicação com a foto de um gato",
   },
   {
     title: "Feed da comunidade",
     description:
       "Acompanhe as publicações recentes e descubra novos momentos felinos.",
-    image: "/img/feedimg.jpg",
+    image: "/img/gatos/feedimg.jpg",
     alt: "Feed de publicações da comunidade Cats",
   },
   {
     title: "Descubra novos gatos",
     description:
       "Encontre perfis populares e conheça novos amigos felinos todos os dias.",
-    image: "/img/findcats.jpeg",
+    image: "/img/gatos/findcats.jpeg",
     alt: "Lista de gatos populares na plataforma",
   },
 ];
 
 export default function Funcionalities() {
   return (
-    <section className="py-16 lg:py-20 bg-[url('/img/catsbackground.png')] bg-cover bg-center bg-no-repeat">
+    <section className="py-16 lg:py-20 bg-[url('/img/background/catsbackground.png')] bg-cover bg-center bg-no-repeat">
       <Container>
         <div className="mx-auto text-center lg:mb-12">
           <Title>Funcionalidades que aproximam você dos gatos</Title>

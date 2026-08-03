@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="relative isolate flex min-h-svh items-end overflow-hidden md:min-h-190 lg:min-h-195">
       <Image
-        src="/img/cathero.png"
+        src="/img/hero/cathero.png"
         alt="Gato descansando sobre um cobertor"
         fill
         priority
@@ -15,7 +15,7 @@ export default function Hero() {
       />
 
       <Image
-        src="/img/heromobile.png"
+        src="/img/hero/heromobile.png"
         alt="Gato descansando sobre um cobertor"
         fill
         priority
@@ -28,7 +28,7 @@ export default function Hero() {
       <div className="mx-auto flex w-full max-w-7xl justify-center px-5 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:px-8 sm:pb-16 lg:pb-14">
         <div className="flex w-full max-w-5xl flex-col items-center text-center">
           <Image
-            src="/img/catslogodois.png"
+            src="/img/logo/catslogodois.png"
             alt="Cats"
             width={250}
             height={160}

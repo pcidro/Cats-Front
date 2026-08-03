@@ -9,7 +9,7 @@ export default function LoginLayout({
     <main
       className="flex min-h-dvh items-center justify-center bg-background px-4 py-8 lg:px-8"
       style={{
-        backgroundImage: "url('/img/auth-background.png')",
+        backgroundImage: "url('/img/background/auth-background.png')",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -18,7 +18,7 @@ export default function LoginLayout({
       <div className="grid w-full max-w-310 overflow-hidden rounded-4xl border border-border bg-surface shadow-[0_24px_70px_rgba(74,48,40,0.14)] lg:min-h-190 lg:grid-cols-2">
         <aside className="relative hidden min-h-190 overflow-hidden lg:block">
           <Image
-            src="/img/loginlogo.jpeg"
+            src="/img/logo/loginlogo.jpeg"
             alt="Gato descansando em um cobertor"
             fill
             priority
@@ -36,7 +36,7 @@ export default function LoginLayout({
 
           <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-center px-12 pb-12 text-center xl:px-14 xl:pb-14">
             <Image
-              src="/img/catslogodois.png"
+              src="/img/logo/catslogodois.png"
               alt="Cats"
               width={250}
               height={250}

@@ -60,7 +60,7 @@ export default function Header() {
           <Link href={user ? "/explorar" : "/"}>
             <img
               className="h-12 w-auto"
-              src="/img/catalogo.png"
+              src="/img/logo/catalogo.png"
               alt="Logo cats"
             />
           </Link>
@@ -96,7 +96,7 @@ export default function Header() {
                 >
                   <img
                     className="size-11 cursor-pointer rounded-full object-cover ring-2 ring-primary/15 ring-offset-2 transition hover:ring-primary/40"
-                    src={user.avatarUrl || "/img/nouser.jpg"}
+                    src={user.avatarUrl || "/img/gatos/nouser.jpg"}
                     alt={`Foto de ${user.name}`}
                   />
                 </button>
@@ -106,7 +106,7 @@ export default function Header() {
                     <div className="flex items-center gap-3 px-3 py-3">
                       <img
                         className="size-10 rounded-full object-cover"
-                        src={user.avatarUrl || "/img/nouser.jpg"}
+                        src={user.avatarUrl || "/img/gatos/nouser.jpg"}
                       />
 
                       <div className="min-w-0">

@@ -41,7 +41,7 @@ export default function LoginForm() {
     <section className="w-full max-w-107.5">
       <div className="flex justify-center">
         <Image
-          src="/img/catalogo.png"
+          src="/img/logo/catalogo.png"
           alt="Cats"
           width={190}
           height={100}

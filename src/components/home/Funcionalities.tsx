@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Container from "../ui/container";
+import Section from "../ui/section";
 import Title from "../ui/title";
 
 const functionalities = [
@@ -49,7 +50,7 @@ const functionalities = [
 
 export default function Funcionalities() {
   return (
-    <section className="py-16 lg:py-20 bg-[url('/img/background/catsbackground.png')] bg-cover bg-center bg-no-repeat">
+    <Section className="bg-[url('/img/background/catsbackground.png')] bg-cover bg-center bg-no-repeat">
       <Container>
         <div className="mx-auto text-center lg:mb-12">
           <Title>Funcionalidades que aproximam você dos gatos</Title>
@@ -89,6 +90,6 @@ export default function Funcionalities() {
           ))}
         </ul>
       </Container>
-    </section>
+    </Section>
   );
 }

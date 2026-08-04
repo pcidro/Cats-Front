@@ -1,3 +1,4 @@
+import DonthaveCat from "@/components/home/DonthaveCat";
 import Funcionalities from "@/components/home/Funcionalities";
 import Hero from "@/components/home/Hero";
 import HowItWorks from "@/components/home/HowItWorks";
@@ -10,6 +11,7 @@ export default function Page() {
       <Funcionalities />
       <HowItWorks />
       <KnowCommunity />
+      <DonthaveCat />
     </div>
   );
 }

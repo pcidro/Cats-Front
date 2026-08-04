@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, PawPrint } from "lucide-react";
 import Container from "../ui/container";
+import Section from "../ui/section";
 import Title from "../ui/title";
 
 export default function KnowCommunity() {
@@ -30,7 +31,7 @@ export default function KnowCommunity() {
   ];
 
   return (
-    <section className="mt-20 overflow-hidden ">
+    <Section className="overflow-hidden">
       <Container>
         <div className="relative overflow-hidden rounded-[2rem] border border-border bg-surface px-5 py-10 shadow-sm sm:px-8 md:py-14 lg:px-12">
           <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-primary/10 blur-3xl" />
@@ -93,6 +94,6 @@ export default function KnowCommunity() {
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

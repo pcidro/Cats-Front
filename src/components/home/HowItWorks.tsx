@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Container from "../ui/container";
+import Section from "../ui/section";
 import Title from "../ui/title";
 
 const steps = [
@@ -32,13 +33,13 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-16 md:py-24">
+    <Section>
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <Title>Como funciona?</Title>
 
           <p className="mt-3 text-sm leading-6 text-muted-foreground md:text-base">
-            Em poucos passos, você cria seu perfil, cadastra seus gatos e começa
+            Em poucos passos, você cria seu perfil, cadastre seus gatos e começa
             a fazer parte da comunidade.
           </p>
         </div>
@@ -80,6 +81,6 @@ export default function HowItWorks() {
           ))}
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

@@ -4,6 +4,7 @@ import HappeningNow from "@/components/home/HappeningNow";
 import Hero from "@/components/home/Hero";
 import HowItWorks from "@/components/home/HowItWorks";
 import KnowCommunity from "@/components/home/KnowCommunity";
+import LastCta from "@/components/home/LastCta";
 
 export default function Page() {
   return (
@@ -14,6 +15,7 @@ export default function Page() {
       <KnowCommunity />
       <DonthaveCat />
       <HappeningNow />
+      <LastCta />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header/header";
 import { getUser } from "@/utils/getuser";
 import { UserContextProvider } from "@/context/userContext";
+import Footer from "@/components/home/Footer";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -30,8 +31,11 @@ export default async function RootLayout({
     <html lang="pt-BR" className={`${nunito.variable} ${nunitoSans.variable}`}>
       <body className="font-sans">
         <UserContextProvider user={user}>
-          <Header />
-          <main className="pb-24 md:pb-0">{children}</main>
+          <div className="flex flex-col min-h-[calc(100vh+10rem)]">
+            <Header />
+            <main className="pb-24 md:pb-0 flex-1 ">{children}</main>
+            <Footer />
+          </div>
         </UserContextProvider>
       </body>
     </html>

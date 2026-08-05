@@ -56,10 +56,10 @@ export default function Header() {
   return (
     <>
       <div className="sticky top-0 z-40 hidden w-full border-b border-border/70 bg-white/90 backdrop-blur-md md:block">
-        <header className="flex items-center justify-between mx-auto max-w-7xl px-4 py-3">
+        <header className="flex items-center justify-between mx-auto max-w-7xl px-4 py-1.5">
           <Link href={user ? "/explorar" : "/"}>
             <img
-              className="h-12 w-auto"
+              className="h-16 w-auto"
               src="/img/logo/catalogo.png"
               alt="Logo cats"
             />

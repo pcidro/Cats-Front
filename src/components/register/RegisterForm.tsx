@@ -40,7 +40,7 @@ export default function RegisterForm() {
   }, [state.ok, router]);
 
   return (
-    <section className="w-full max-w-107.5">
+    <section className="w-full min-h-dvh flex flex-col justify-center p-6 mx-auto md:min-h-auto md:block md:max-w-107.5">
       <div className="flex justify-center">
         <Image
           src="/img/logo/catalogo.png"

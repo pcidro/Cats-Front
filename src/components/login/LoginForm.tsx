@@ -38,7 +38,7 @@ export default function LoginForm() {
   }, [state.ok, router]);
 
   return (
-    <section className="w-full max-w-107.5">
+    <section className="w-full min-h-dvh flex flex-col justify-center p-6 mx-auto md:max-w-107.5">
       <div className="flex justify-center">
         <Image
           src="/img/logo/catalogo.png"

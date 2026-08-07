@@ -6,24 +6,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
 import { useUser } from "@/context/userContext";
+import { useState } from "react";
+import PostForm from "../postar/postForm";
 
 export default function AppSidebar() {
-  const menuItems = [
-    {
-      title: "Postar",
-      href: "/postar",
-      icon: Plus,
-    },
-    {
-      title: "Meu Perfil",
-      href: "/profile/human",
-      icon: User,
-    },
-  ];
-
   const pathname = usePathname();
   const { user } = useUser();
-
   return (
     <aside className="fixed top-[76px] left-0 z-30 hidden h-[calc(100vh-76px)] w-64 flex-col border-r border-border bg-surface md:flex">
       <header className="border-b border-border px-6 py-6">
@@ -41,46 +29,27 @@ export default function AppSidebar() {
       </header>
 
       <nav className="flex-1 space-y-2 p-4">
-        {menuItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = pathname === item.href;
-
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "group flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200",
-                isActive
-                  ? "bg-secondary text-primary"
-                  : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground",
-              )}
-            >
-              <span
-                className={cn(
-                  "flex h-9 w-9 items-center justify-center rounded-lg transition-colors",
-                  isActive
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-background text-muted-foreground group-hover:text-primary",
-                )}
-              >
-                {item.title === "Postar" ? (
-                  <Icon className="h-5 w-5" />
-                ) : user?.avatarUrl ? (
-                  <img
-                    className="h-full w-full rounded-full object-cover"
-                    src={user.avatarUrl}
-                    alt="Foto do usuário"
-                  />
-                ) : (
-                  <Icon className="h-5 w-5" />
-                )}
-              </span>
-
-              {item.title}
-            </Link>
-          );
-        })}
+        <PostForm />
+        <Link
+          href="/profile/human"
+          className={cn(
+            "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200",
+            pathname === "/profile/human"
+              ? "bg-secondary text-primary"
+              : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground",
+          )}
+        >
+          {user?.avatarUrl ? (
+            <img
+              className="h-5 w-5 rounded-full object-cover"
+              src={user.avatarUrl}
+              alt="Foto do usuário"
+            />
+          ) : (
+            <User className="h-5 w-5" />
+          )}
+          Meu Perfil
+        </Link>
       </nav>
 
       <footer className="border-t border-border p-4">

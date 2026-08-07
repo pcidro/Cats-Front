@@ -1,77 +1,96 @@
 "use client";
+
 import { cn } from "@/lib/utils";
-import {
-  ShoppingCart,
-  Package,
-  Tags,
-  LogOut,
-  CheckCheckIcon,
-} from "lucide-react";
+import { LogOut, Plus, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
+import { useUser } from "@/context/userContext";
 
 export default function AppSidebar() {
   const menuItems = [
     {
       title: "Postar",
-      href: "/dashboard",
-      icon: ShoppingCart,
+      href: "/postar",
+      icon: Plus,
     },
     {
-      title: "Produtos",
-      href: "/dashboard/products",
-      icon: Package,
-    },
-    {
-      title: "Categorias",
-      href: "/dashboard/categories",
-      icon: Tags,
-    },
-    {
-      title: "Pedidos Finalizados",
-      href: "/dashboard/finalized",
-      icon: CheckCheckIcon,
+      title: "Meu Perfil",
+      href: "/profile/human",
+      icon: User,
     },
   ];
+
   const pathname = usePathname();
+  const { user } = useUser();
+
   return (
-    <aside className="h-screen w-64 border-r sticky top-0 hidden md:flex flex-col">
-      <header className="border-b border-app-border p-6">
-        <h2 className="text-xl font-bold">
-          <span className="text-white font-bold text-3xl text-center sm:text-4xl">
-            Cats
-          </span>{" "}
-        </h2>
-        <p className="text-sm mt-2 text-zinc-500">Olá</p>
+    <aside className="fixed top-[76px] left-0 z-30 hidden h-[calc(100vh-76px)] w-64 flex-col border-r border-border bg-surface md:flex">
+      <header className="border-b border-border px-6 py-6">
+        <div className="mt-4">
+          <p className="text-sm text-muted-foreground">Olá,</p>
+
+          <h2 className="mt-0.5 truncate text-lg font-semibold text-foreground">
+            {user?.name}
+          </h2>
+
+          <p className="mt-1 text-sm text-muted-foreground">
+            Bem-vindo ao Cats 🐾
+          </p>
+        </div>
       </header>
-      <nav className="flex-1 p-4 space-y-4">
+
+      <nav className="flex-1 space-y-2 p-4">
         {menuItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
+
           return (
             <Link
-              className={cn(
-                "flex items-center gap-3 px-3 py-2 duration-300",
-                isActive ? "bg-brand-primary" : "hover:bg-gray-600",
-              )}
               key={item.href}
               href={item.href}
+              className={cn(
+                "group flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200",
+                isActive
+                  ? "bg-secondary text-primary"
+                  : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground",
+              )}
             >
-              <Icon />
+              <span
+                className={cn(
+                  "flex h-9 w-9 items-center justify-center rounded-lg transition-colors",
+                  isActive
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-background text-muted-foreground group-hover:text-primary",
+                )}
+              >
+                {item.title === "Postar" ? (
+                  <Icon className="h-5 w-5" />
+                ) : user?.avatarUrl ? (
+                  <img
+                    className="h-full w-full rounded-full object-cover"
+                    src={user.avatarUrl}
+                    alt="Foto do usuário"
+                  />
+                ) : (
+                  <Icon className="h-5 w-5" />
+                )}
+              </span>
+
               {item.title}
             </Link>
           );
         })}
       </nav>
-      <footer className="border-t border-app-border p-4">
-        <form className="flex items-center">
+
+      <footer className="border-t border-border p-4">
+        <form>
           <Button
-            className="w-full justify-start text-white hover:text-red-500 duration-300 hover:bg-transparent cursor-pointer"
             type="submit"
             variant="ghost"
+            className="h-11 w-full justify-start gap-3 rounded-xl px-4 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
           >
-            <LogOut className="w-5 h-5" />
+            <LogOut className="h-5 w-5" />
             Sair
           </Button>
         </form>

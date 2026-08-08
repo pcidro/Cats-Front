@@ -1,12 +1,11 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { LogOut, Plus, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
 import { useUser } from "@/context/userContext";
-import { useState } from "react";
 import PostForm from "../postar/postForm";
 
 export default function AppSidebar() {

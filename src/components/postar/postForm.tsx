@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import CreatePostDialog from "../dialogs/createPostDialog";
 import { Plus } from "lucide-react";
+import { createPostAction } from "@/actions/post/createPostAction";
 
 export default function PostForm() {
   const [open, setOpen] = useState(false);
@@ -19,15 +20,13 @@ export default function PostForm() {
     const formData = new FormData(e.currentTarget);
     const result = await createPostAction(formData);
 
-    setLoading(false);
-
-    if (result.success) {
+    if (result.ok) {
       setOpen(false);
       router.refresh();
       return;
-    } else {
-      setError(result.error || "Erro ao cadastrar post");
     }
+
+    setLoading(false);
   }
 
   return (
@@ -50,6 +49,7 @@ export default function PostForm() {
         }}
         error={error}
         loading={loading}
+        setLoading={setLoading}
         handleCreatePost={handleCreatePost}
       />
     </>

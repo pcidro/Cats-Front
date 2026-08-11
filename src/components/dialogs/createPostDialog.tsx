@@ -39,7 +39,6 @@ export default function CreatePostDialog({
   open,
   setOpen,
   error,
-  setLoading,
   loading,
   handleCreatePost,
 }: createPostDialogProps) {

@@ -20,6 +20,13 @@ export async function createPostAction(formData: FormData) {
       return apiError("Informe o gato que será postado");
     }
 
+    if (!imageUrl || imageUrl.size === 0) {
+      return apiError("Selecione uma foto para postar");
+    }
+    if (!caption) {
+      return apiError("Escreva uma legenda");
+    }
+
     if (!imageUrl || !caption) {
       return apiError("Preencha todos os campos");
     }
@@ -30,9 +37,7 @@ export async function createPostAction(formData: FormData) {
       token,
     });
 
-    console.log(response);
-
-    return { data: response, ok: true, errors: {} };
+    return { data: response, ok: true, errors: { form: "" } };
   } catch (error) {
     return apiError(error);
   }

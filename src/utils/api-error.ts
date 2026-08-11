@@ -3,7 +3,12 @@ export default function apiError(error: unknown) {
     ok: false,
     data: null,
     errors: {
-      form: error instanceof Error ? error.message : "Unknown error.",
+      form:
+        typeof error === "string"
+          ? error
+          : error instanceof Error
+            ? error.message
+            : "Unknown error.",
     },
   };
 }

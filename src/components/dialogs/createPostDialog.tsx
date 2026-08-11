@@ -163,14 +163,28 @@ export default function CreatePostDialog({
                     rows={4}
                     placeholder="Conte a história dessa foto..."
                   />
+                  {error && (
+                    <p className="text-sm font-semibold text-red-500 text-center">
+                      {error}
+                    </p>
+                  )}
                 </div>
 
-                <button
-                  type="submit"
-                  className="w-full rounded-xl bg-primary py-3 font-semibold text-white"
-                >
-                  Publicar foto
-                </button>
+                {loading ? (
+                  <button
+                    type="submit"
+                    className="w-full rounded-xl bg-primary py-3 font-semibold text-white"
+                  >
+                    Publicando...
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="w-full rounded-xl bg-primary py-3 font-semibold text-white"
+                  >
+                    Publicar foto
+                  </button>
+                )}
               </div>
             </div>
           </div>

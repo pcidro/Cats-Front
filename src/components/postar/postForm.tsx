@@ -26,6 +26,10 @@ export default function PostForm() {
       return;
     }
 
+    if (!result.ok) {
+      setError(result.errors.form);
+    }
+
     setLoading(false);
   }
 

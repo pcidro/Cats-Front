@@ -8,6 +8,7 @@ import Container from "../ui/container";
 import { useUser } from "@/context/userContext";
 import { useState } from "react";
 import DeletePostDialog from "../dialogs/deletePostDialog";
+import EditPostDialog from "../dialogs/editPostDIalog";
 
 interface feedPhotosProps {
   posts: PostType[];
@@ -17,6 +18,7 @@ export default function FeedPhotos({ posts }: feedPhotosProps) {
   const { user } = useUser();
   const [openMenuPostId, setOpenMenuPostId] = useState<string | null>(null);
   const [postDeleteId, setPostDeleteId] = useState<string | null>(null);
+  const [editPostId, setEditPostId] = useState<string | null>(null);
 
   const toggleMenu = (postId: string) => {
     setOpenMenuPostId((prevId) => (prevId === postId ? null : postId));
@@ -24,6 +26,11 @@ export default function FeedPhotos({ posts }: feedPhotosProps) {
 
   const DeletePost = (postId: string) => {
     setPostDeleteId(postId);
+    setOpenMenuPostId(null);
+  };
+
+  const EditPost = (postId: string) => {
+    setEditPostId(postId);
     setOpenMenuPostId(null);
   };
 
@@ -120,7 +127,10 @@ export default function FeedPhotos({ posts }: feedPhotosProps) {
                       {openMenuPostId === post.id && (
                         <div className="absolute right-0 top-full mt-1 z-50 w-40 overflow-hidden rounded-2xl border border-border/70 bg-white/95 p-2 shadow-lg">
                           <div className="flex flex-col gap-1 text-sm">
-                            <button className="flex items-center gap-2 cursor-pointer w-full text-left px-3 py-1.5 hover:bg-gray-100 text-gray-700 rounded-lg transition">
+                            <button
+                              className="flex items-center gap-2 cursor-pointer w-full text-left px-3 py-1.5 hover:bg-gray-100 text-gray-700 rounded-lg transition"
+                              onClick={() => EditPost(post.id)}
+                            >
                               <Pencil className="size-4" />
                               <span>Editar post</span>
                             </button>
@@ -224,6 +234,7 @@ export default function FeedPhotos({ posts }: feedPhotosProps) {
         postToDeleteId={postDeleteId}
         setPostDeleteId={setPostDeleteId}
       />
+      <EditPostDialog postToEditId={editPostId} setPostEditId={setEditPostId} />
     </div>
   );
 }

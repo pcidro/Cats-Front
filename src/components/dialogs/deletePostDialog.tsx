@@ -26,7 +26,11 @@ export default function DeletePostDialog({
     <div>
       <Dialog
         open={!!postToDeleteId}
-        onOpenChange={(open) => !open && setPostDeleteId(null)}
+        onOpenChange={(open) => {
+          if (!open) {
+            setPostDeleteId(null);
+          }
+        }}
       >
         <DialogContent className="p-6 bg-surface">
           <DialogHeader>

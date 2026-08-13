@@ -5,12 +5,24 @@ import { useRouter } from "next/navigation";
 import CreatePostDialog from "../dialogs/createPostDialog";
 import { Plus } from "lucide-react";
 import { createPostAction } from "@/actions/post/createPostAction";
+import { toast } from "sonner";
 
 export default function PostForm() {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const router = useRouter();
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      setImagePreview(URL.createObjectURL(file));
+    } else {
+      setImagePreview(null);
+    }
+  }
 
   async function handleCreatePost(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -21,13 +33,17 @@ export default function PostForm() {
     const result = await createPostAction(formData);
 
     if (result.ok) {
+      toast.success("Post criado com sucesso!");
       setOpen(false);
       router.refresh();
+      setLoading(false);
       return;
     }
 
     if (!result.ok) {
-      setError(result.errors.form);
+      const errorMsg = result.errors?.form || "Erro ao criar o post";
+      toast.error(errorMsg);
+      setError(errorMsg);
     }
 
     setLoading(false);
@@ -52,6 +68,9 @@ export default function PostForm() {
           }
         }}
         error={error}
+        imagePreview={imagePreview}
+        handleFileChange={handleFileChange}
+        setImagePreview={setImagePreview}
         loading={loading}
         setLoading={setLoading}
         handleCreatePost={handleCreatePost}

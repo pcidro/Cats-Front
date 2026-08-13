@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import { toast } from "sonner";
 
 type editPostDialogProps = {
   postToEditId: string | null;
@@ -35,12 +36,16 @@ export default function EditPostDialog({
       const res = await EditPostAction(formData);
 
       if (res.ok) {
+        toast.success("Post editado com sucesso!");
         setPostEditId(null);
         router.refresh();
       } else {
-        setError(res.errors?.form || "Erro ao editar o post.");
+        const errorMsg = res.errors?.form || "Erro ao editar o post.";
+        toast.error(errorMsg);
+        setError(errorMsg);
       }
     } catch (err) {
+      toast.error("Ocorreu um erro inesperado.");
       setError("Ocorreu um erro inesperado.");
     } finally {
       setLoading(false);

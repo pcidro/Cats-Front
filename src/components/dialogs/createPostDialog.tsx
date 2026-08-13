@@ -17,7 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { CatType } from "@/types/catType";
-import { Camera } from "lucide-react";
+import { Camera, Trash } from "lucide-react";
 import {
   Dispatch,
   FormEvent,
@@ -31,6 +31,9 @@ interface createPostDialogProps {
   setOpen: (open: boolean) => void;
   error: string | null;
   loading: boolean;
+  handleFileChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  imagePreview?: string | null;
+  setImagePreview: (imagePreview: string | null) => void;
   setLoading: Dispatch<SetStateAction<boolean>>;
   handleCreatePost(e: FormEvent<HTMLFormElement>): Promise<void>;
 }
@@ -41,6 +44,9 @@ export default function CreatePostDialog({
   error,
   loading,
   handleCreatePost,
+  handleFileChange,
+  setImagePreview,
+  imagePreview,
 }: createPostDialogProps) {
   const [cats, setCats] = useState<CatType[]>([]);
   const [selectedCatId, setSelectedCatId] = useState("");
@@ -72,25 +78,50 @@ export default function CreatePostDialog({
         </DialogHeader>
         <form onSubmit={handleCreatePost}>
           <div className="grid md:grid-cols-[288px_1fr] gap-5 ">
-            <div className="flex flex-col border-dashed border-2 border-primary rounded bg-[#FAF2EF] p-3 w-2xs">
-              <img src="/img/background/imgpostar.png" />
-              <label
-                htmlFor="photo"
-                className="flex cursor-pointer flex-col items-center justify-center rounded-xl  p-8 transition"
-              >
-                <span className="text-primary flex items-center gap-2 mb-2 border border-primary p-2 rounded-2xl font-bold hover:text-foreground whitespace-nowrap ">
-                  <Camera size={22} />
-                  Adicionar uma foto
-                </span>
-                <span className="text-sm text-muted-foreground">
-                  PNG ou JPG
-                </span>
-              </label>
+            <div className="relative flex flex-col items-center justify-center border-dashed border-2 border-primary rounded-xl bg-[#FAF2EF] w-full min-h-[280px] overflow-hidden">
+              {imagePreview ? (
+                <div className="relative w-full h-full min-h-[280px]">
+                  <Image
+                    src={imagePreview}
+                    alt="Preview"
+                    fill
+                    className="object-cover"
+                  />
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setImagePreview(null);
+                    }}
+                    className="absolute top-3 right-3 z-20 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full cursor-pointer shadow-md transition-colors"
+                  >
+                    <Trash size={20} />
+                  </button>
+                </div>
+              ) : (
+                <label
+                  htmlFor="photo"
+                  className="relative flex cursor-pointer flex-col items-center justify-center w-full h-full p-6 text-center"
+                >
+                  <img src="/img/background/imgpostar.png" alt="Ilustração" className="mb-4 max-h-36 object-contain" />
+                  <span className="text-primary flex items-center gap-2 mb-2 border border-primary p-2 px-4 rounded-2xl font-bold hover:text-foreground whitespace-nowrap">
+                    <Camera size={22} />
+                    Adicionar uma foto
+                  </span>
+                  <span className="text-sm text-muted-foreground">
+                    PNG ou JPG
+                  </span>
+                </label>
+              )}
+
               <input
                 type="file"
                 name="imageUrl"
-                className="hidden"
                 id="photo"
+                className={`absolute inset-0 opacity-0 cursor-pointer w-full h-full ${
+                  imagePreview ? "z-0 pointer-events-none" : "z-10"
+                }`}
+                onChange={handleFileChange}
               />
             </div>
             <div>

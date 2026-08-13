@@ -5,6 +5,7 @@ import Header from "@/components/header/header";
 import { getUser } from "@/utils/getuser";
 import { UserContextProvider } from "@/context/userContext";
 import Footer from "@/components/home/Footer";
+import { Toaster } from "sonner";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -36,6 +37,15 @@ export default async function RootLayout({
             <main className="pb-24 md:pb-0 flex-1 ">{children}</main>
             <Footer />
           </div>
+          <Toaster
+            position="bottom-left"
+            gap={8}
+            toastOptions={{
+              duration: 4000,
+              className:
+                "!bg-[#302b29] !text-white !border-0 !rounded-lg !shadow-lg !px-4 !py-3 !text-sm",
+            }}
+          />
         </UserContextProvider>
       </body>
     </html>

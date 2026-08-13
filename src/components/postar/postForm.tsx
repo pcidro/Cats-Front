@@ -7,7 +7,11 @@ import { Plus } from "lucide-react";
 import { createPostAction } from "@/actions/post/createPostAction";
 import { toast } from "sonner";
 
-export default function PostForm() {
+interface PostFormProps {
+  children?: React.ReactNode;
+}
+
+export default function PostForm({ children }: PostFormProps) {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -51,21 +55,25 @@ export default function PostForm() {
 
   return (
     <>
-      <button
-        type="button"
-        className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-secondary/60 hover:text-foreground"
-        onClick={() => setOpen(true)}
-      >
-        <Plus className="h-5 w-5" />
-        Postar
-      </button>
+      {children ? (
+        <div onClick={() => setOpen(true)} className="contents">
+          {children}
+        </div>
+      ) : (
+        <button
+          type="button"
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-secondary/60 hover:text-foreground"
+          onClick={() => setOpen(true)}
+        >
+          <Plus className="h-5 w-5" />
+          Postar
+        </button>
+      )}
       <CreatePostDialog
         open={open}
         setOpen={(val) => {
           setOpen(val);
-          if (!val) {
-            setError(null);
-          }
+          if (!val) setError(null);
         }}
         error={error}
         imagePreview={imagePreview}

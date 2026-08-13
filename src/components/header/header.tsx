@@ -87,14 +87,6 @@ export default function Header() {
               );
             })}
 
-            {user && (
-              <li>
-                <button className="cursor-pointer flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:brightness-110 hover:shadow-lg active:scale-95">
-                  <Plus className="size-4" strokeWidth={2.5} />
-                </button>
-              </li>
-            )}
-
             {user ? (
               <li className="relative">
                 <button

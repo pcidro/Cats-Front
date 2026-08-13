@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Compass, Home, LogIn, UserPlus, LogOut } from "lucide-react";
+import { Compass, Home, LogIn, UserPlus, LogOut, Plus } from "lucide-react";
 import { useUser } from "@/context/userContext";
 import { logoutAction } from "@/actions/user/logoutAction";
+import PostForm from "../postar/postForm";
 
 const navigationItems = [
   {
@@ -37,7 +38,7 @@ export default function HeaderMobile() {
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 pb-[env(safe-area-inset-bottom)] md:hidden">
-      <ul className="mx-auto grid max-w-lg grid-cols-4">
+      <ul className="mx-auto grid max-w-lg grid-cols-5 items-center">
         {navigationItems.map((item) => {
           const Icon = item.icon;
           const active = isActive(item.href);
@@ -61,6 +62,13 @@ export default function HeaderMobile() {
 
         {user ? (
           <>
+            <li className="flex min-h-16 flex-col items-center justify-center gap-1  text-xs font-medium">
+              <PostForm>
+                <button className="cursor-pointer rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:brightness-110 hover:shadow-lg active:scale-95">
+                  <Plus className="size-4" strokeWidth={2.5} />
+                </button>
+              </PostForm>
+            </li>
             <li>
               <Link
                 href="/profile"
@@ -74,12 +82,15 @@ export default function HeaderMobile() {
                   className={`w-6 h-6 rounded-full object-cover ${
                     isActive("/profile") ? "ring-2 ring-primary" : ""
                   }`}
-                  src={user.avatarUrl ? user.avatarUrl : "/img/gatos/nouser.jpg"}
+                  src={
+                    user.avatarUrl ? user.avatarUrl : "/img/gatos/nouser.jpg"
+                  }
                   alt="Perfil"
                 />
                 Perfil
               </Link>
             </li>
+
             <li>
               <button
                 onClick={handleLogout}

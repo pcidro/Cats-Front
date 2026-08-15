@@ -9,6 +9,9 @@ import { useUser } from "@/context/userContext";
 import { useState } from "react";
 import DeletePostDialog from "../dialogs/deletePostDialog";
 import EditPostDialog from "../dialogs/editPostDIalog";
+import CommentsForm from "../comments/CommentsForm";
+import DeleteCommentDialog from "../dialogs/deleteCommentDialog";
+import EditCommentDialog from "../dialogs/EditCommentDialog";
 
 interface feedPhotosProps {
   posts: PostType[];
@@ -19,9 +22,20 @@ export default function FeedPhotos({ posts }: feedPhotosProps) {
   const [openMenuPostId, setOpenMenuPostId] = useState<string | null>(null);
   const [postDeleteId, setPostDeleteId] = useState<string | null>(null);
   const [editPostId, setEditPostId] = useState<string | null>(null);
+  const [editCommentId, setEditCommentId] = useState<string | null>(null);
+  const [comment, setComment] = useState<string | null>("");
+  const [showAllComments, setShowAllComments] = useState(false);
+  const [commentDeleteId, setCommentDeleteId] = useState<string | null>(null);
+  const [openMenuCommentId, setOpenMenuCommentId] = useState<string | null>(
+    null,
+  );
 
   const toggleMenu = (postId: string) => {
     setOpenMenuPostId((prevId) => (prevId === postId ? null : postId));
+  };
+
+  const toggleMenuComments = (CommentId: string) => {
+    setOpenMenuCommentId((prevId) => (prevId === CommentId ? null : CommentId));
   };
 
   const DeletePost = (postId: string) => {
@@ -32,6 +46,16 @@ export default function FeedPhotos({ posts }: feedPhotosProps) {
   const EditPost = (postId: string) => {
     setEditPostId(postId);
     setOpenMenuPostId(null);
+  };
+
+  const EditComment = (commentId: string) => {
+    setEditCommentId(commentId);
+    setOpenMenuCommentId(null);
+  };
+
+  const DeleteComment = (commentId: string) => {
+    setCommentDeleteId(commentId);
+    setOpenMenuCommentId(null);
   };
 
   return (
@@ -155,7 +179,7 @@ export default function FeedPhotos({ posts }: feedPhotosProps) {
                 {/* Post image */}
                 <Link
                   href="/post"
-                  className="relative block aspect-[4/5] overflow-hidden bg-muted"
+                  className="relative block aspect-video mx-4 rounded-2xl overflow-hidden bg-muted"
                 >
                   <Image
                     className="object-cover transition duration-500 group-hover:scale-[1.02]"
@@ -187,8 +211,13 @@ export default function FeedPhotos({ posts }: feedPhotosProps) {
                       <span>{post._count.comments}</span>
                     </span>
                     {post._count.comments > 2 && (
-                      <button className="text-sm text-muted-foreground transition hover:text-primary">
-                        Ver todos os {post._count.comments} comentários
+                      <button
+                        onClick={() => setShowAllComments(!showAllComments)}
+                        className="text-sm text-muted-foreground transition hover:text-primary cursor-pointer"
+                      >
+                        {showAllComments
+                          ? "Ver menos"
+                          : `  Ver todos os ${post._count.comments} comentários`}
                       </button>
                     )}
                   </div>
@@ -197,33 +226,81 @@ export default function FeedPhotos({ posts }: feedPhotosProps) {
                 {/* Comments section */}
                 {post.comments && post.comments.length > 0 && (
                   <ul className="flex flex-col gap-2 px-4 py-2 border-t border-border/50">
-                    {post.comments?.slice(0, 3).map((comment) => (
-                      <li
-                        key={comment.id}
-                        className="flex items-center gap-2 text-xs"
-                      >
-                        {comment.user?.avatarUrl && (
-                          <Image
-                            className="size-6 rounded-full object-cover"
-                            src={
-                              comment.user.avatarUrl || "/img/gatos/nouser.jpg"
-                            }
-                            alt={comment.user.name || "Avatar"}
-                            width={24}
-                            height={24}
-                          />
-                        )}
-                        <div>
-                          <span className="font-semibold text-foreground mr-1">
-                            {comment.user?.name || "Usuário"}:
-                          </span>
-                          <span className="text-muted-foreground">
-                            {comment.content}
-                          </span>
-                        </div>
-                      </li>
-                    ))}
+                    {post.comments
+                      ?.slice(0, showAllComments ? undefined : 3)
+                      .map((comment) => (
+                        <li
+                          key={comment.id}
+                          className="flex items-center justify-between gap-2 text-xs"
+                        >
+                          <div className="flex items-center gap-2 min-w-0">
+                            {comment.user?.avatarUrl && (
+                              <Image
+                                className="size-6 rounded-full object-cover shrink-0"
+                                src={
+                                  comment.user.avatarUrl ||
+                                  "/img/gatos/nouser.jpg"
+                                }
+                                alt={comment.user.name || "Avatar"}
+                                width={24}
+                                height={24}
+                              />
+                            )}
+                            <div className="break-words">
+                              <span className="font-semibold text-foreground mr-1">
+                                {comment.user?.name || "Usuário"}:
+                              </span>
+                              <span className="text-muted-foreground">
+                                {comment.content}
+                              </span>
+                            </div>
+                          </div>
+
+                          {user && (
+                            <div className="relative">
+                              <button
+                                onClick={() => toggleMenuComments(comment.id)}
+                                className="cursor-pointer font-bold text-base px-2 py-0.5 text-muted-foreground hover:text-foreground hover:bg-black/5 rounded-full transition leading-none"
+                              >
+                                ...
+                              </button>
+
+                              {openMenuCommentId === comment.id && (
+                                <div className="absolute right-5 bottom-0 z-50 w-44 overflow-hidden rounded-2xl border border-border/70 bg-white/95 backdrop-blur-sm p-1.5 shadow-lg">
+                                  <div className="flex flex-col gap-1 text-sm">
+                                    <button
+                                      className="flex items-center gap-2 cursor-pointer w-full text-left px-3 py-1.5 hover:bg-gray-100 text-gray-700 rounded-lg transition"
+                                      onClick={() => EditComment(comment.id)}
+                                    >
+                                      <Pencil className="size-4" />
+                                      <span>Editar comentário</span>
+                                    </button>
+                                    <button
+                                      onClick={() => {
+                                        DeleteComment(comment.id);
+                                        setOpenMenuCommentId(null);
+                                      }}
+                                      className="flex items-center gap-2 cursor-pointer w-full text-left px-3 py-1.5 hover:bg-red-50 text-red-600 rounded-lg transition"
+                                    >
+                                      <Trash2 className="size-4" />
+                                      <span>Apagar Comentário</span>
+                                    </button>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </li>
+                      ))}
                   </ul>
+                )}
+                {user && (
+                  <CommentsForm
+                    user={user}
+                    postId={post.id}
+                    comment={comment}
+                    setComment={setComment}
+                  />
                 )}
               </article>
             </li>
@@ -235,6 +312,14 @@ export default function FeedPhotos({ posts }: feedPhotosProps) {
         setPostDeleteId={setPostDeleteId}
       />
       <EditPostDialog postToEditId={editPostId} setPostEditId={setEditPostId} />
+      <DeleteCommentDialog
+        CommentToDeleteId={commentDeleteId}
+        setCommentToDeleteId={setCommentDeleteId}
+      />
+      <EditCommentDialog
+        commentToEditId={editCommentId}
+        setCommentEditId={setEditCommentId}
+      />
     </div>
   );
 }

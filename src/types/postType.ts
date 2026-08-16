@@ -15,6 +15,9 @@ export type PostType = {
     username: string;
     avatarUrl: string;
   };
+  likes: {
+    userId: string;
+  }[];
   author: {
     id: string;
     name: string;

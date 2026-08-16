@@ -9,7 +9,10 @@ export async function getUserCatsAction(): Promise<CatType[]> {
     const token = await getToken();
     if (!token) return [];
 
-    const cats = await apiClient<CatType[]>("/api/cats/me", { token });
+    const cats = await apiClient<CatType[]>("/api/cats/me", {
+      token,
+      cache: "no-store",
+    });
     return cats;
   } catch (error) {
     console.error("Erro ao buscar gatos do usuário:", error);

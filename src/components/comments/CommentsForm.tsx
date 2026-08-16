@@ -3,6 +3,7 @@ import { UserResponse } from "@/utils/getuser";
 import { useRouter } from "next/navigation";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { toast } from "sonner";
+import CatsLoading from "@/components/ui/loading";
 
 interface CommentsFormProps {
   user: UserResponse;
@@ -68,9 +69,9 @@ export default function CommentsForm({
         <button
           type="submit"
           disabled={loading}
-          className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-4 py-2 rounded-xl text-sm transition cursor-pointer disabled:opacity-50 shrink-0"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-4 py-2 rounded-xl text-sm transition cursor-pointer disabled:opacity-75 shrink-0 flex items-center justify-center min-w-[80px]"
         >
-          {loading ? "..." : "Publicar"}
+          {loading ? <CatsLoading className="w-8 h-auto text-white" /> : "Publicar"}
         </button>
       </form>
     </div>

@@ -25,6 +25,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import CatsLoading from "@/components/ui/loading";
 
 interface createPostDialogProps {
   open: boolean;
@@ -205,21 +206,20 @@ export default function CreatePostDialog({
                   )}
                 </div>
 
-                {loading ? (
-                  <button
-                    type="submit"
-                    className="w-full rounded-xl bg-primary py-3 font-semibold text-white"
-                  >
-                    Publicando...
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    className="w-full rounded-xl bg-primary py-3 font-semibold text-white"
-                  >
-                    Publicar foto
-                  </button>
-                )}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full rounded-xl bg-primary py-3 font-semibold text-white flex items-center justify-center gap-2 transition hover:bg-primary/90 disabled:opacity-75 cursor-pointer disabled:cursor-not-allowed"
+                >
+                  {loading ? (
+                    <>
+                      <CatsLoading className="w-8 h-auto text-white" />
+                      <span>Publicando...</span>
+                    </>
+                  ) : (
+                    "Publicar foto"
+                  )}
+                </button>
               </div>
             </div>
           </div>

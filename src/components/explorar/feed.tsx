@@ -4,6 +4,8 @@ import FeedPhotos from "./feedPhotos";
 import { useEffect, useRef, useState } from "react";
 import photosGet from "@/actions/post/photosget";
 
+import CatsLoading from "@/components/ui/loading";
+
 interface feedProps {
   posts: PostType[];
 }
@@ -55,10 +57,18 @@ export default function Feed({ posts }: feedProps) {
     };
   }, [infinite]);
 
+  useEffect(() => {
+    setPhotosFeed(posts);
+  }, [posts]);
+
   return (
     <div>
       <FeedPhotos posts={photosFeed} />
-      {loading && <p>Carregando...</p>}
+      {loading && (
+        <div className="flex h-[50px] my-4 mx-auto items-center justify-center text-amber-500">
+          <CatsLoading className="w-12 h-auto" />
+        </div>
+      )}
     </div>
   );
 }

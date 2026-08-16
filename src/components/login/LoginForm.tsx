@@ -14,6 +14,7 @@ import { Label } from "../ui/label";
 import { useActionState, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import LoginAction from "@/actions/user/loginAction";
+import CatsLoading from "../ui/loading";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function LoginForm() {
     setShowPassword(!showPassword);
   }
 
-  const [state, action] = useActionState(LoginAction, initialState);
+  const [state, action, isPending] = useActionState(LoginAction, initialState);
 
   useEffect(() => {
     if (state.ok) {
@@ -126,10 +127,20 @@ export default function LoginForm() {
 
         <button
           type="submit"
-          className="mt-6 flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-primary px-5 text-base font-semibold text-primary-foreground transition hover:brightness-95 cursor-pointer"
+          disabled={isPending}
+          className="mt-6 flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-primary px-5 text-base font-semibold text-primary-foreground transition hover:brightness-95 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
         >
-          <PawPrint className="size-5" />
-          Entrar na conta
+          {isPending ? (
+            <>
+              <CatsLoading className="w-8 h-auto text-primary-foreground" />
+              <span>Entrando na conta...</span>
+            </>
+          ) : (
+            <>
+              <PawPrint className="size-5" />
+              <span>Entrar na conta</span>
+            </>
+          )}
         </button>
 
         <div className="my-5 flex items-center gap-4">

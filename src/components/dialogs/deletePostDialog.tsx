@@ -12,6 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 import { toast } from "sonner";
+import CatsLoading from "@/components/ui/loading";
 
 type deletePostDialogProps = {
   postToDeleteId: string | null;
@@ -74,9 +75,16 @@ export default function DeletePostDialog({
             <button
               disabled={loading}
               onClick={handleDelete}
-              className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition disabled:opacity-50"
+              className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition disabled:opacity-75 flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed min-w-[110px]"
             >
-              {loading ? "Deletando..." : "Sim, deletar"}
+              {loading ? (
+                <>
+                  <CatsLoading className="w-8 h-auto text-white" />
+                  <span>Deletando...</span>
+                </>
+              ) : (
+                "Sim, deletar"
+              )}
             </button>
           </DialogFooter>
         </DialogContent>

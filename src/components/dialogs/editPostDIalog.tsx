@@ -12,6 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { toast } from "sonner";
+import CatsLoading from "@/components/ui/loading";
 
 type editPostDialogProps = {
   postToEditId: string | null;
@@ -102,9 +103,16 @@ export default function EditPostDialog({
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 text-sm font-medium bg-primary rounded-lg text-white hover:bg-amber-700 cursor-pointer duration-200 disabled:opacity-50"
+                className="px-4 py-2 text-sm font-medium bg-primary rounded-lg text-white hover:bg-primary/90 cursor-pointer duration-200 disabled:opacity-75 flex items-center justify-center gap-2 min-w-[100px]"
               >
-                {loading ? "Salvando..." : "Editar"}
+                {loading ? (
+                  <>
+                    <CatsLoading className="w-8 h-auto text-white" />
+                    <span>Salvando...</span>
+                  </>
+                ) : (
+                  "Editar"
+                )}
               </button>
             </DialogFooter>
           </form>

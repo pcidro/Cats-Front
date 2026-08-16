@@ -12,6 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { toast } from "sonner";
+import CatsLoading from "@/components/ui/loading";
 
 type EditCommentDialogProps = {
   commentToEditId: string | null;
@@ -104,9 +105,16 @@ export default function EditCommentDialog({
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition cursor-pointer disabled:opacity-50"
+                className="px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition cursor-pointer disabled:opacity-75 flex items-center justify-center gap-2 min-w-[90px]"
               >
-                {loading ? "Salvando..." : "Salvar"}
+                {loading ? (
+                  <>
+                    <CatsLoading className="w-8 h-auto text-white" />
+                    <span>Salvando...</span>
+                  </>
+                ) : (
+                  "Salvar"
+                )}
               </button>
             </DialogFooter>
           </form>

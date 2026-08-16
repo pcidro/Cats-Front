@@ -15,6 +15,7 @@ import { Label } from "../ui/label";
 import { useActionState, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import RegisterAction from "@/actions/user/registerAction";
+import CatsLoading from "../ui/loading";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -30,7 +31,10 @@ export default function RegisterForm() {
     data: null,
   };
 
-  const [state, action] = useActionState(RegisterAction, initialState);
+  const [state, action, isPending] = useActionState(
+    RegisterAction,
+    initialState,
+  );
 
   useEffect(() => {
     if (state.ok) {
@@ -155,10 +159,20 @@ export default function RegisterForm() {
 
         <button
           type="submit"
-          className="mt-5 flex h-11 w-full items-center justify-center gap-3 rounded-xl bg-primary px-5 text-sm sm:text-base font-semibold text-primary-foreground transition hover:brightness-95 cursor-pointer"
+          disabled={isPending}
+          className="mt-5 flex h-11 w-full items-center justify-center gap-3 rounded-xl bg-primary px-5 text-sm sm:text-base font-semibold text-primary-foreground transition hover:brightness-95 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
         >
-          <PawPrint className="size-5" />
-          Criar conta
+          {isPending ? (
+            <>
+              <CatsLoading className="w-8 h-auto text-primary-foreground" />
+              <span>Criando conta...</span>
+            </>
+          ) : (
+            <>
+              <PawPrint className="size-5" />
+              <span>Criar conta</span>
+            </>
+          )}
         </button>
 
         <div className="my-4 flex items-center gap-4">

@@ -108,7 +108,7 @@ export default function PostCard({
 
               {/* Tutor Mini Avatar Badge */}
               <Link
-                href="/perfiluser"
+                href={`/profile/${user?.username}`}
                 className="absolute -bottom-0.5 -right-0.5 block transition hover:scale-110"
                 title={`Tutor: ${post.author?.name || "Tutor"}`}
               >
@@ -134,7 +134,7 @@ export default function PostCard({
                     {" "}
                     • por{" "}
                     <Link
-                      href="/perfiluser"
+                      href={`/profile/${user?.username}`}
                       className="font-medium text-foreground transition hover:text-primary hover:underline"
                     >
                       {post.author.name}

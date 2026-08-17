@@ -124,7 +124,7 @@ export default function Header() {
                     <div className="my-1 h-px bg-border/70" />
 
                     <Link
-                      href="/perfil"
+                      href={`/profile/${user.username}`}
                       onClick={() => setOpenMenu(false)}
                       className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground  hover:bg-primary/10 hover:text-foreground"
                     >

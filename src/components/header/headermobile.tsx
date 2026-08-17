@@ -71,7 +71,7 @@ export default function HeaderMobile() {
             </li>
             <li>
               <Link
-                href="/profile"
+                href={`/profile/${user.username}`}
                 className={`flex min-h-16 flex-col items-center justify-center gap-1 px-2 py-2 text-xs font-medium ${
                   isActive("/profile")
                     ? "text-primary"

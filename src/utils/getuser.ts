@@ -10,6 +10,7 @@ export type UserResponse = {
   role: "ADMIN" | "USER" | "MODERATOR";
   createdAt: string;
   avatarUrl?: string | undefined;
+  username: string;
 };
 
 export async function getUser(): Promise<UserResponse | null> {

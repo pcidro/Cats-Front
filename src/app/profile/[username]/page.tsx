@@ -1,6 +1,7 @@
 import userProfileAction from "@/actions/user/UserProfileAction";
 import EditProfileButton from "@/components/profile/EditProfileButton";
 import MyCats from "@/components/profile/myCats";
+import ProfilePhotos from "@/components/profile/profilePhotos";
 import Container from "@/components/ui/container";
 import { Heart } from "lucide-react";
 
@@ -45,6 +46,7 @@ export default async function PageProfile({ params }: userPageParams) {
       </div>
       <Container className="mt-6">
         <MyCats user={data} />
+        <ProfilePhotos photos={data} />
       </Container>
     </div>
   );

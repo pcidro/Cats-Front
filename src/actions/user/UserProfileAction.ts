@@ -10,6 +10,7 @@ interface User {
   createdAt: string;
   updatedAt: string;
   cats: Cat[];
+  posts: PostType[];
 }
 
 interface Cat {
@@ -21,6 +22,7 @@ interface Cat {
   createdAt: string;
 }
 
+import { PostType } from "@/types/postType";
 import { apiClient } from "@/utils/api-client";
 import apiError from "@/utils/api-error";
 

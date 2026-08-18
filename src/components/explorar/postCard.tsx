@@ -8,7 +8,6 @@ import CommentsForm from "../comments/CommentsForm";
 import { useUser } from "@/context/userContext";
 import { startTransition, useOptimistic, useState } from "react";
 import { toggleLikeAction } from "@/actions/like/toggleLikeAction";
-import { useRouter } from "next/navigation";
 
 interface PostCardProps {
   post: PostType;
@@ -108,7 +107,7 @@ export default function PostCard({
 
               {/* Tutor Mini Avatar Badge */}
               <Link
-                href={`/profile/${user?.username}`}
+                href={`/profile/${post.author.username}`}
                 className="absolute -bottom-0.5 -right-0.5 block transition hover:scale-110"
                 title={`Tutor: ${post.author?.name || "Tutor"}`}
               >
@@ -134,7 +133,7 @@ export default function PostCard({
                     {" "}
                     • por{" "}
                     <Link
-                      href={`/profile/${user?.username}`}
+                      href={`/profile/${post.author.username}`}
                       className="font-medium text-foreground transition hover:text-primary hover:underline"
                     >
                       {post.author.name}

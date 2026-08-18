@@ -1,16 +1,10 @@
 "use client";
 
+import { useUser } from "@/context/userContext";
+import { CatType } from "@/types/catType";
+import { PostType } from "@/types/postType";
 import { PawPrint, Plus, Heart } from "lucide-react";
 import Link from "next/link";
-
-interface Cat {
-  id: string;
-  name: string;
-  birthDate: string;
-  bio: string;
-  avatarUrl: string;
-  createdAt: string;
-}
 
 interface MyCatsProps {
   user: {
@@ -19,11 +13,13 @@ interface MyCatsProps {
     username: string;
     avatarUrl?: string;
     email?: string;
-    cats: Cat[];
+    cats: CatType[];
+    posts: PostType[];
   };
 }
 
 export default function MyCats({ user }: MyCatsProps) {
+  const userDono = useUser();
   return (
     <div className="w-full bg-white border border-border/70 shadow-xs p-6 sm:p-8 rounded-3xl flex flex-col gap-6">
       <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -34,13 +30,15 @@ export default function MyCats({ user }: MyCatsProps) {
           </h2>
         </div>
 
-        <button
-          type="button"
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary hover:bg-orange-800 text-white text-xs font-semibold transition-colors cursor-pointer"
-        >
-          <Plus className="size-4 text-primary" color="white" />
-          <span>Adicionar gato</span>
-        </button>
+        {userDono.user?.id === user.id && (
+          <button
+            type="button"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary hover:bg-orange-800 text-white text-xs font-semibold transition-colors cursor-pointer"
+          >
+            <Plus className="size-4 text-primary" color="white" />
+            <span>Adicionar gato</span>
+          </button>
+        )}
       </div>
 
       {/* Grid de Cards dos Gatos */}

@@ -9,7 +9,7 @@ interface User {
   role: "USER" | "ADMIN";
   createdAt: string;
   updatedAt: string;
-  cats: Cat[];
+  cats: CatType[];
   posts: PostType[];
 }
 
@@ -22,6 +22,7 @@ interface Cat {
   createdAt: string;
 }
 
+import { CatType } from "@/types/catType";
 import { PostType } from "@/types/postType";
 import { apiClient } from "@/utils/api-client";
 import apiError from "@/utils/api-error";

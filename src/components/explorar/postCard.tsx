@@ -95,7 +95,7 @@ export default function PostCard({
           <div className="flex min-w-0 items-center gap-3">
             {/* Avatar section with Cat photo + Tutor mini badge */}
             <div className="relative shrink-0">
-              <Link href="/post">
+              <Link href={`/cats/${post.cat.id}`}>
                 <Image
                   className="size-11 rounded-full object-cover ring-2 ring-primary/15 ring-offset-2 ring-offset-surface transition hover:ring-primary/40"
                   src={post.cat.avatarUrl}
@@ -107,7 +107,7 @@ export default function PostCard({
 
               {/* Tutor Mini Avatar Badge */}
               <Link
-                href={`/profile/${post.author.username}`}
+                href={`/profile/${post.author?.username}`}
                 className="absolute -bottom-0.5 -right-0.5 block transition hover:scale-110"
                 title={`Tutor: ${post.author?.name || "Tutor"}`}
               >
@@ -123,7 +123,7 @@ export default function PostCard({
 
             <div className="min-w-0">
               <h3 className="font-bold text-foreground transition group-hover:text-primary">
-                <Link href="/post">{post.cat.name}</Link>
+                <Link href={`/cats/${post.cat.id}`}>{post.cat.name}</Link>
               </h3>
 
               <p className="text-xs text-muted-foreground">

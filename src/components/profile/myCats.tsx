@@ -113,7 +113,7 @@ export default function MyCats({ user }: MyCatsProps) {
                 </h3>
 
                 <Link
-                  href={`/cat`}
+                  href={`/cats/${cat.id}`}
                   className="mt-3.5 inline-flex items-center justify-center w-full py-1.5 px-3 rounded-xl border border-orange-200/80 bg-white hover:bg-orange-50 text-orange-900 text-xs font-semibold transition-colors"
                 >
                   Ver perfil

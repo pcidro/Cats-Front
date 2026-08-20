@@ -181,14 +181,6 @@ export default function RegisterForm() {
           <div className="h-px flex-1 bg-border" />
         </div>
 
-        <Link
-          href="/login"
-          className="flex h-11 w-full items-center justify-center gap-3 rounded-xl border border-primary/45 bg-surface px-5 text-sm sm:text-base font-semibold text-primary transition hover:bg-secondary"
-        >
-          <ArrowLeft className="size-5" />
-          Entrar com o google
-        </Link>
-
         <p className="mt-5 flex flex-wrap items-center justify-center gap-2 text-center text-sm text-foreground">
           Já tem uma conta?
           <Link

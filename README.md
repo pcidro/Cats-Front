@@ -26,8 +26,6 @@ O backend é uma API REST construída separadamente com **Express**, **Prisma** 
 
 ---
 
-## 🖼️ Screenshots
-
 ### 🏠 Homepage
 
 Landing page com hero imersivo, seções de funcionalidades, como funciona, comunidade e CTAs para criação de conta.

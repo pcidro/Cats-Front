@@ -108,7 +108,7 @@ Seção de comentários com avatar do usuário, formulário inline para novo com
 
 ### ✏️ Editar Comentário
 
-Dialog para edição de comentário existente com campo de texto pré-preenchido.
+Dialog para edição de comentário existente com campo de texto.
 
 ![Editar Comentário](./docs/editcomment.png)
 

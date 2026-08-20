@@ -33,7 +33,7 @@ export default function ProfilePhotos({ photos }: ProfilePhotosType) {
           {photos.posts.map((post) => (
             <Link
               key={post.id}
-              href="/post"
+              href={`/post/${post.id}`}
               className="group relative aspect-square overflow-hidden rounded-2xl bg-muted border border-border/60"
             >
               <Image

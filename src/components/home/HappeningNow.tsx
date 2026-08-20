@@ -13,7 +13,10 @@ export default function HappeningNow() {
 
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <li className="w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-surface shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-            <Link href="/post" className="group block">
+            <Link
+              href="/post/f5a63a95-4717-48a7-9b67-45ad3f5b4c91"
+              className="group block"
+            >
               <article>
                 <header className="flex items-center justify-between gap-3 px-4 py-3">
                   <div className="flex min-w-0 items-center gap-3">
@@ -73,7 +76,10 @@ export default function HappeningNow() {
           </li>
 
           <li className="w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-surface shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-            <Link href="/post" className="group block">
+            <Link
+              href="/post/d17f1b84-a7c1-411c-a865-d530632f02ab"
+              className="group block"
+            >
               <article>
                 <header className="flex items-center justify-between gap-3 px-4 py-3">
                   <div className="flex min-w-0 items-center gap-3">
@@ -135,7 +141,10 @@ export default function HappeningNow() {
             </Link>
           </li>
           <li className="w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-surface shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-            <Link href="/post" className="group block">
+            <Link
+              href="/post/c6e7a46f-7ad1-4c07-8f23-cb44a211e2a4"
+              className="group block"
+            >
               <article>
                 <header className="flex items-center justify-between gap-3 px-4 py-3">
                   <div className="flex min-w-0 items-center gap-3">

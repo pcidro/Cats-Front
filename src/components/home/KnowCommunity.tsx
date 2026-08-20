@@ -8,21 +8,21 @@ import Title from "../ui/title";
 export default function KnowCommunity() {
   const cats = [
     {
-      id: "idbiscoto",
+      id: "239ee6c6-3014-4575-aec7-93b74272094d",
       cat: "Biscoito",
       image: "/img/gatos/biscoitocat.png",
       alt: "Gato Biscoito",
       article: "o",
     },
     {
-      id: "idnina",
+      id: "dbf2fca4-0307-4b54-820f-772e2438bf11",
       cat: "Nina",
       image: "/img/gatos/ninacat.png",
       alt: "Gata Nina",
       article: "a",
     },
     {
-      id: "idmilo",
+      id: "e105eb91-5c34-46f2-85c9-4f25b3f11b9a",
       cat: "Milo",
       image: "/img/gatos/milocat.png",
       alt: "Gato Milo",

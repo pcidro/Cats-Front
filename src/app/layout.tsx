@@ -24,8 +24,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  post,
 }: Readonly<{
   children: React.ReactNode;
+  post: React.ReactNode;
 }>) {
   const user = await getUser();
   return (
@@ -34,7 +36,10 @@ export default async function RootLayout({
         <UserContextProvider user={user}>
           <div className="flex flex-col min-h-[calc(100vh+10rem)]">
             <Header />
-            <main className="pb-24 md:pb-0 flex-1 ">{children}</main>
+            <main className="pb-24 md:pb-0 flex-1 ">
+              {children}
+              <div>{post}</div>
+            </main>
             <Footer />
           </div>
           <Toaster

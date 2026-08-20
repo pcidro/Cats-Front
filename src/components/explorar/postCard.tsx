@@ -78,6 +78,7 @@ export default function PostCard({
   };
 
   async function handleLike(postId: string) {
+    if (!user) return;
     startTransition(async () => {
       setOptimisticLike(null);
       await toggleLikeAction(postId);
@@ -183,7 +184,7 @@ export default function PostCard({
 
         {/* Post image */}
         <Link
-          href="/post"
+          href={`/post/${post.id}`}
           className="relative block aspect-video mx-4 rounded-2xl overflow-hidden bg-muted"
         >
           <Image
@@ -208,11 +209,15 @@ export default function PostCard({
           <div className="flex items-center gap-2 border-t border-border/70 pt-3">
             <button
               onClick={() => handleLike(post.id)}
-              className={`cursor-pointer flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold transition ${
-                optimisticLike.isLiked
-                  ? "bg-red-50 text-red-500 hover:bg-red-100"
-                  : "text-muted-foreground hover:text-primary"
+              disabled={!user}
+              className={`flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold transition ${
+                !user
+                  ? "cursor-default text-muted-foreground opacity-80"
+                  : optimisticLike.isLiked
+                  ? "cursor-pointer bg-red-50 text-red-500 hover:bg-red-100"
+                  : "cursor-pointer text-muted-foreground hover:text-primary"
               }`}
+              title={!user ? "Faça login para curtir" : undefined}
             >
               <PawPrint className="size-5" strokeWidth={1.8} />
               <span>{optimisticLike.count}</span>
@@ -303,13 +308,30 @@ export default function PostCard({
               ))}
           </ul>
         )}
-        {user && (
+        {user ? (
           <CommentsForm
             user={user}
             postId={post.id}
             comment={comment}
             setComment={setComment}
           />
+        ) : (
+          <div className="border-t border-border/50 px-4 py-3 text-center text-xs sm:text-sm text-muted-foreground bg-muted/20">
+            <Link
+              href="/register"
+              className="font-semibold text-primary hover:underline"
+            >
+              Crie uma conta
+            </Link>{" "}
+            ou{" "}
+            <Link
+              href="/login"
+              className="font-semibold text-primary hover:underline"
+            >
+              faça login
+            </Link>{" "}
+            para curtir e comentar nesse post.
+          </div>
         )}
       </article>
     </li>

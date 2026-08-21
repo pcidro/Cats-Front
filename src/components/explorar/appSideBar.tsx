@@ -30,7 +30,7 @@ export default function AppSidebar() {
       <nav className="flex-1 space-y-2 p-4">
         <PostForm />
         <Link
-          href="/profile/human"
+          href={`/profile/${user?.username}`}
           className={cn(
             "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200",
             pathname === "/profile/human"

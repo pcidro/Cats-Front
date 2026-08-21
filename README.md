@@ -28,8 +28,6 @@ O backend é uma API REST construída separadamente com **Express**, **Prisma** 
 
 ---
 
-## 🖼️ Screenshots
-
 ### 🏠 Homepage
 
 Landing page com hero imersivo, seções de funcionalidades, como funciona, comunidade e CTAs para criação de conta.
@@ -112,7 +110,7 @@ Seção de comentários com avatar do usuário, formulário inline para novo com
 
 ### ✏️ Editar Comentário
 
-Dialog para edição de comentário existente com campo de texto pré-preenchido.
+Dialog para edição de comentário existente com campo de texto.
 
 ![Editar Comentário](./docs/editcomment.png)
 

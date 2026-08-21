@@ -24,7 +24,7 @@ O projeto foi desenvolvido com **Next.js 16** (App Router), **React 19**, **Type
 
 O backend é uma API REST construída separadamente com **Express**, **Prisma** e **PostgreSQL**. As imagens são hospedadas no **Cloudinary**.
 
-🚀 **DEPLOY** > [https://cats-topaz.vercel.app](https://cats-topaz.vercel.app)
+**DEPLOY** > [https://cats-topaz.vercel.app](https://cats-topaz.vercel.app)
 
 ---
 

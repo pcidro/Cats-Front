@@ -19,6 +19,7 @@ import {
 } from "react";
 import CatsLoading from "@/components/ui/loading";
 import { UserResponse } from "@/utils/getuser";
+import DeleteUserDialog from "./deleteUserDialog";
 
 interface EditProfileDialogProps {
   loading: boolean;
@@ -208,6 +209,15 @@ export default function EditProfileDialog({
           </form>
         </DialogContent>
       </Dialog>
+
+      <DeleteUserDialog
+        open={deleteDialogOpen}
+        setOpen={setDeleteDialogOpen}
+        userId={user?.id}
+        onDeleted={() => {
+          setOpen(false);
+        }}
+      />
     </>
   );
 }

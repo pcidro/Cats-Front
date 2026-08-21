@@ -28,6 +28,15 @@ O backend é uma API REST construída separadamente com **Express**, **Prisma** 
 
 ---
 
+### 🧪 Usuário para Testes
+
+Caso não queira criar uma conta, use este usuário para teste:
+
+- **Email:** `usuario@example.com`
+- **Senha:** `Usuario123`
+
+---
+
 ### 🏠 Homepage
 
 Landing page com hero imersivo, seções de funcionalidades, como funciona, comunidade e CTAs para criação de conta.

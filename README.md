@@ -18,11 +18,13 @@ Uma rede social moderna e responsiva onde donos podem cadastrar seus gatos, comp
 
 ## 📖 Sobre
 
-Este é o **frontend** da rede social **Cats** — uma plataforma completa onde apaixonados por gatos podem criar perfis para seus gatos, compartilhar fotos, curtir, comentar e explorar publicações de toda a comunidade.
+Este é o **frontend** da rede social **Cats** — uma rede social completa onde apaixonados por gatos podem criar perfis para seus gatos, compartilhar fotos, curtir, comentar e explorar publicações de toda a comunidade.
 
 O projeto foi desenvolvido com **Next.js 16** (App Router), **React 19**, **TypeScript** e **Tailwind CSS 4**, aproveitando recursos modernos como **Server Actions**, **Parallel Routes**, **Intercepting Routes**, **React Compiler**, **useOptimistic** e **feed infinito com scroll**.
 
 O backend é uma API REST construída separadamente com **Express**, **Prisma** e **PostgreSQL**. As imagens são hospedadas no **Cloudinary**.
+
+🚀 **DEPLOY** > [https://cats-topaz.vercel.app](https://cats-topaz.vercel.app)
 
 ---
 
